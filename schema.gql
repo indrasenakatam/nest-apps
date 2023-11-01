@@ -1,0 +1,64 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+directive @upper on FIELD_DEFINITION
+
+"""geolocation """
+type GeoCoordinates {
+  latitude: String!
+  longitude: String!
+}
+
+"""address """
+type UserAddress {
+  place: String!
+  city: String!
+  locaton: GeoCoordinates!
+  country: String!
+}
+
+"""user """
+type User {
+  userId: MongoObjectId!
+  name: String!
+  age: Float!
+  email: String!
+  address: UserAddress!
+  creationDate: Date!
+}
+
+input GeoCoordinatesInput {
+  latitude: String!
+  longitude: String!
+}
+
+input UserAddressInput {
+  place: String!
+  city: String!
+  locaton: GeoCoordinatesInput!
+  country: String!
+}
+
+"""Date custom scalar type"""
+scalar Date
+
+"""Mongo object id scalar type"""
+scalar MongoObjectId
+
+type Query {
+  users: [User!]!
+  user(userId: String!): User!
+}
+
+type Mutation {
+  addUser(newUserData: CreateUserDto!): User!
+}
+
+input CreateUserDto {
+  name: String!
+  age: Float!
+  email: String!
+  address: UserAddressInput!
+  creationDate: Date!
+}
