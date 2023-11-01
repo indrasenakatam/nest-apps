@@ -28,8 +28,8 @@ export class UserService {
     const order = {};
 
     sort.map((item) => {
-      const obj = JSON.parse(JSON.stringify(eval('(' + item + ')')));
-      console.log('fsfgsdfgsdfg', obj, '---', obj.direction, obj.property);
+      // const obj = JSON.parse(JSON.stringify(eval('(' + item + ')')));
+      const obj = JSON.parse(JSON.stringify(item));
       order[obj.property] = obj.direction as SortOrder;
     });
     console.log('sortOrder', order);

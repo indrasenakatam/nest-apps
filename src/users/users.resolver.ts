@@ -3,14 +3,20 @@ import { UserService } from './users.service';
 import { User } from './users.model';
 import { NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/user-create.dto';
+import { Pagination, PaginationFilter } from 'src/query-filters/pagination';
+import { SortingFilter } from 'src/query-filters/sorting';
+import { FilteringParams, Filtering } from 'src/query-filters/params-filter';
 
 @Resolver(() => User)
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
   @Query(() => [User])
-  async users(): Promise<User[]> {
-    return this.userService.findAll();
+  async users(
+    @Args({ name: 'pagination', type: () => PaginationFilter }) pagination?: PaginationFilter,
+    @Args({name: 'sort', type: ()=> [SortingFilter]}) sort?: SortingFilter[]
+  ): Promise<User[]> {
+    return this.userService.findAll(pagination, sort);
   }
 
   @Query(() => User)

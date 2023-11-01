@@ -47,8 +47,20 @@ scalar Date
 scalar MongoObjectId
 
 type Query {
-  users: [User!]!
+  users(pagination: PaginationFilter!, sort: [SortingFilter!]!): [User!]!
   user(userId: String!): User!
+}
+
+input PaginationFilter {
+  page: Float!
+  limit: Float!
+  size: Float!
+  offset: Float!
+}
+
+input SortingFilter {
+  property: String!
+  direction: String!
 }
 
 type Mutation {

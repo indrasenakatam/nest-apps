@@ -3,18 +3,19 @@ import {
   createParamDecorator,
   ExecutionContext,
 } from '@nestjs/common';
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 import { Request } from 'express';
 
 @ObjectType()
+@InputType()
 export class PaginationFilter {
   @ApiProperty({
     type: Number,
     description: 'page number',
   })
-  @IsString()
+  @IsNumber()
   @Field(() => Number)
   readonly page: number;
 
@@ -22,7 +23,7 @@ export class PaginationFilter {
     type: Number,
     description: 'page limit',
   })
-  @IsString()
+  @IsNumber()
   @Field(() => Number)
   readonly limit: number;
 
@@ -30,7 +31,7 @@ export class PaginationFilter {
     type: Number,
     description: 'page size',
   })
-  @IsString()
+  @IsNumber()
   @Field(() => Number)
   readonly size: number;
 
@@ -38,7 +39,7 @@ export class PaginationFilter {
     type: Number,
     description: 'page number',
   })
-  @IsString()
+  @IsNumber()
   @Field(() => Number)
   readonly offset: number;
 }

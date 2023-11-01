@@ -4,9 +4,11 @@ import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { AllExceptionsFilter } from './exception-filters/all-exception.filter';
+import { json, urlencoded } from 'express';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
   app.useGlobalPipes(new ValidationPipe());
   app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
   const { httpAdapter } = app.get(HttpAdapterHost);
